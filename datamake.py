@@ -140,3 +140,31 @@ def univ_make(df, df_collist):
 
     # ['第二段階指定1科類', '第二段階指定1枠数', '指定1残席', '指定1底点', '指定1点数', '指定1学籍番号']
     return df
+
+
+
+""""
+#未完成
+def univ_make_r(df, df_collist):
+    for j in df_collist:
+        df[j[0]] = df[j[0]].astype('str')
+
+    for k in range(4):
+        for l in range(3 - k, 1, -1):
+            if (df[df_collist[k][0]] in df[df_collist[l][0]]):
+                df[df_collist[l][1]] += df[df_collist[k][1]]
+
+    for j in df_collist:
+        df[j[2]] = df[j[1]]
+        df[j[4]] = df[j[1]].apply(lambda x: np.zeros((x)))
+        df[j[5]] = df[j[1]].apply(lambda x: np.zeros((x)))
+
+    # ['第二段階指定1科類', '第二段階指定1枠数', '指定1残席', '指定1底点', '指定1点数', '指定1学籍番号']
+    return df
+
+
+df, df_collist = make_df(
+    '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/sinhuri2018.csv'
+)
+print(univ_make_r(df, df_collist))
+""""
