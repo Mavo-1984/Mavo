@@ -54,7 +54,7 @@ def da(student, univ, df_collist):
 def simulation(cnt):
     result = []
     df, df_collist = datamake.make_df(
-        '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/sinhuri2018.csv'
+        '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/sinhuri2018.csv'
     )
     n, m, k = datamake.stu_num()
 

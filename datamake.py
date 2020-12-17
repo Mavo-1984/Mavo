@@ -100,7 +100,7 @@ def make_pre(pre_list, type, a, b):
 # 学生のデータの作成。
 # # student(0:学生番号,1科類2点数3内定学科4Time5選好)
 #n = 1076    m = [113, 151, 150, 443, 190, 29]k = 79
-def make_stu(n, m, k):
+def make_stu(n, m, k, a, b):
     tmp = 0
     tmp_2 = ["1", "2", "3", "4", "5", "6"]
     cus_m = np.cumsum(m)
@@ -115,7 +115,7 @@ def make_stu(n, m, k):
         # make_prefを使う
         student[i][1] = tmp_2[tmp]
 
-        pre = make_pre(pre_list, tmp, 0.9, 0.95)
+        pre = make_pre(pre_list, tmp, a, b)
         #(0-77)
         for j in range(k - 1):
             student[i][5 + j] = pre[j]

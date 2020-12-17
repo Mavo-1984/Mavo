@@ -61,6 +61,7 @@ def da(student, univ, df_collist):
     return student, univ
 
 
+"""
 def simulation(cnt):
     result0 = []
     result1 = []
@@ -96,3 +97,4 @@ def simulation(cnt):
 #kekka, kekka2 = simulation(3)
 kekka = simulation(1)
 print(kekka)
+"""
