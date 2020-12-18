@@ -144,27 +144,25 @@ def univ_make(df, df_collist):
 
 #未完成
 def univ_make_s(df, df_collist):
+    univ_s = df.copy()
     for j in df_collist:
-        df[j[0]] = df[j[0]].astype('str')
+        univ_s[j[0]] = univ_s[j[0]].astype('str')
 
     for index, row in df.iterrows():
-        if index == "学部番号":
-            continue
-        else:
-            for k in range(3):
-                for l in range(1, 4 - k):
-                    if (df.iloc[index][df_collist[k][0]]
-                            in df.iloc[index][df_collist[l][0]]):
-                        ext = df.at[index, df_collist[k][1]].copy()
-                        df.at[index, df_collist[l][1]] += ext
+        for k in range(3):
+            for l in range(1, 4 - k):
+                if (univ_s.iloc[index][df_collist[k][0]]
+                        in univ_s.iloc[index][df_collist[l + k][0]]):
+                    ext = df.at[index, df_collist[k][1]].copy()
+                    univ_s.at[index, df_collist[l + k][1]] += ext
 
     for j in df_collist:
-        df[j[2]] = df[j[1]]
-        df[j[4]] = df[j[1]].apply(lambda x: np.zeros((x)))
-        df[j[5]] = df[j[1]].apply(lambda x: np.zeros((x)))
+        univ_s[j[2]] = univ_s[j[1]].copy()
+        univ_s[j[4]] = univ_s[j[1]].apply(lambda x: np.zeros((x)))
+        univ_s[j[5]] = univ_s[j[1]].apply(lambda x: np.zeros((x)))
 
     # ['第二段階指定1科類', '第二段階指定1枠数', '指定1残席', '指定1底点', '指定1点数', '指定1学籍番号']
-    return df
+    return univ_s
 
 
 #df_r = univ_make_s(df, df_collist)

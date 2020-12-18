@@ -51,24 +51,31 @@ def da_s(student, univ_s, df_collist):
                     univ_s[df_collist[count][3]].iloc[applyn] = np.amin(
                         univ_s[df_collist[count][4]].iloc[applyn])
 
-                    if univ_s[df_collist[count][2]].iloc[applyn] != 0:
-                        univ_s[df_collist[count][2]].iloc[applyn] -= 1
                     if univ_s[df_collist[count]
                               [2]].iloc[applyn] == 0 and count == 3:
                         break
                     elif univ_s[df_collist[count]
-                                [2]].iloc[applyn] != 0 and count == 3:
+                                [2]].iloc[applyn] > 0 and count == 3:
                         univ_s[df_collist[count][2]].iloc[applyn] -= 1
+                        break
+
+                    elif univ_s[df_collist[count]
+                                [2]].iloc[applyn] == 0 and count != 3:
                         break
                     else:  #a依存関係のある枠のチェック
                         #依存があったら1枠を減らす、人が押し出されるかみる　押し出された人はdp=-1,t=-1にセット
+                        univ_s[df_collist[count][2]].iloc[applyn] -= 1
                         for R in range(1, 4 - count):
                             if ((univ_s[df_collist[count][0]].iloc[applyn]
                                  ) in (univ_s[df_collist[count +
                                                          R][0]].iloc[applyn])):
                                 # 依存先学科に残席があり
-                                if univ_s[df_collist[count +
-                                                     R][2]].iloc[applyn] > 0:
+                                if ((univ_s[df_collist[count +
+                                                       R][1]].iloc[applyn] > 0)
+                                        and (univ_s[df_collist[count + R]
+                                                    [2]].iloc[applyn] > 0)):
+                                    #依存先学科の残席と枠を削る
+
                                     univ_s[df_collist[count +
                                                       R][1]].iloc[applyn] -= 1
                                     univ_s[df_collist[count +
@@ -88,7 +95,13 @@ def da_s(student, univ_s, df_collist):
                                                univ_s[df_collist[count + R]
                                                       [4]].iloc[applyn])
                                     # 依存先学科に残席がなし
-                                else:
+                                elif (
+                                    (univ_s[df_collist[count +
+                                                       R][1]].iloc[applyn] > 0)
+                                        and
+                                    (univ_s[df_collist[count +
+                                                       R][2]].iloc[applyn]
+                                     == 0)):
                                     # 依存先学科の枠数を削減
                                     univ_s[df_collist[count +
                                                       R][1]].iloc[applyn] -= 1
@@ -110,6 +123,9 @@ def da_s(student, univ_s, df_collist):
                                            [3]].iloc[applyn] = np.amin(
                                                univ_s[df_collist[count + R]
                                                       [4]].iloc[applyn])
+                                else:
+                                    break
+
                 if flag == True:
                     break
                 else:
