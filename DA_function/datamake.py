@@ -142,17 +142,21 @@ def univ_make(df, df_collist):
     return df
 
 
-
-""""
 #未完成
-def univ_make_r(df, df_collist):
+def univ_make_s(df, df_collist):
     for j in df_collist:
         df[j[0]] = df[j[0]].astype('str')
 
-    for k in range(4):
-        for l in range(3 - k, 1, -1):
-            if (df[df_collist[k][0]] in df[df_collist[l][0]]):
-                df[df_collist[l][1]] += df[df_collist[k][1]]
+    for index, row in df.iterrows():
+        if index == "学部番号":
+            continue
+        else:
+            for k in range(3):
+                for l in range(1, 4 - k):
+                    if (df.iloc[index][df_collist[k][0]]
+                            in df.iloc[index][df_collist[l][0]]):
+                        ext = df.at[index, df_collist[k][1]].copy()
+                        df.at[index, df_collist[l][1]] += ext
 
     for j in df_collist:
         df[j[2]] = df[j[1]]
@@ -163,8 +167,7 @@ def univ_make_r(df, df_collist):
     return df
 
 
-df, df_collist = make_df(
-    '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/sinhuri2018.csv'
-)
-print(univ_make_r(df, df_collist))
-""""
+#df_r = univ_make_s(df, df_collist)
+#print(df_r.iloc[2]['第二段階指定1科類'] in df_r.iloc[2]['第二段階指定4科類'])
+
+#print(univ_make_s(df, df_collist))

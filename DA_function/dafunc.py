@@ -66,7 +66,7 @@ def simulation(cnt):
     result0 = []
     result1 = []
     df, df_collist = datamake.make_df(
-        '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/sinhuri2018.csv'
+        '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/csvdata/sinhuri2018.csv'
     )
     n, m, k = datamake.stu_num()
 

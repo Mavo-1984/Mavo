@@ -9,7 +9,7 @@ import dafunc
 
 def simulation(cnt, a, b):
     df, df_collist = datamake.make_df(
-        '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/sinhuri2018.csv'
+        '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/csvdata/sinhuri2018.csv'
     )
     n, m, k = datamake.stu_num()
     df_stu = np.zeros((1, n + 1))
