@@ -73,8 +73,9 @@ def simulation_s(cnt, a, b):
 
 #def stu_summary(df_stu):
 
-res0 = simulation_s(1, 0.8, 0.9)
+#res0 = simulation_s(10, 0.8, 0.9)
+res0 = simulation(10, 0.8, 0.9)
 
 #def do_simulation():
 
-print(res0)
+print("HI")
