@@ -8,7 +8,7 @@ import dafunc
 import dafunc_S
 
 
-def simulation(cnt, a, b):
+def simulation(cnt, a, b, rand):
     df, df_collist = datamake.make_df(
         '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/csvdata/sinhuri2018.csv'
     )
@@ -16,7 +16,7 @@ def simulation(cnt, a, b):
     df_stu = np.zeros((1, n + 1))
 
     for j in range(cnt):
-        random.seed(48 + j)
+        random.seed(rand + j)
         student = datamake.make_stu(n, m, k, a, b)
         #print(df_collist)
         univ = datamake.univ_make(df, df_collist)
@@ -39,13 +39,13 @@ def simulation(cnt, a, b):
     return df_stu
 
 
-def simulation_s(cnt, a, b):
+def simulation_s(cnt, a, b, rand):
 
     n, m, k = datamake.stu_num()
     df_stu = np.zeros((1, n + 1))
 
     for j in range(cnt):
-        random.seed(48 + j)
+        random.seed(rand + j)
         df, df_collist = datamake.make_df(
             '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/csvdata/sinhuri2018.csv'
         )
@@ -74,7 +74,7 @@ def simulation_s(cnt, a, b):
 #def stu_summary(df_stu):
 
 #res0 = simulation_s(10, 0.8, 0.9)
-res0 = simulation(10, 0.8, 0.9)
+#res0 = simulation(10, 0.8, 0.9)
 
 #def do_simulation():
 
