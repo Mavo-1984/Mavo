@@ -23,4 +23,17 @@ def run_simulation_s(N, interval_list, rand):
                                 rand)
 
 
-run_simulation(1, [[0.95, 0.97]], 100)
+#a =start ,b=finish ,c間隔
+def make_interval(a, b, c):
+    d = int((b - a) / c)
+    inter = []
+    for i in range(d):
+        inter.append([a + i * c, 1 / 2 + (a + i * c) / 2])
+
+    return inter
+
+
+interval = make_interval(0.0, 1.0, 0.1)
+
+#run_simulation(10, interval, 100)
+run_simulation_s(10, interval, 100)
