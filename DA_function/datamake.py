@@ -110,7 +110,7 @@ def make_stu(n, m, k, a, b):
     for i in range(1, n + 1):
         #0には学生番号、2には点数、3には内定学科（最初は-1）を入れる
         student[i][0] = i
-        student[i][2] = random.randrange(35, 90, 1)
+        student[i][2] = random.randrange(11, 9998, 1)
         student[i][3] = -1
         # make_prefを使う
         student[i][1] = tmp_2[tmp]
