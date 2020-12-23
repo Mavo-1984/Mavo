@@ -14,7 +14,7 @@ def make_interval(a, b, c):
     d = int((b - a) / c)
     inter = []
     for i in range(d):
-        inter.append([a + i * c, 1 / 2 + (a + i * c) / 2])
+        inter.append([round(a + i * c, 2), round(1 / 2 + (a + i * c) / 2, 2)])
 
     return inter
 
@@ -35,7 +35,8 @@ def run_simulation_s(N, interval_list, rand):
                                 rand)
 
 
-interval = make_interval(0.0, 1.0, 0.1)
-
+#interval = make_interval(0.0, 1.0, 0.1)
+#interval = make_interval(0.0, 1.0, 0.1)
+#print(interval)
 #run_simulation(10, interval, 100)
-run_simulation_s(10, interval, 100)
+#run_simulation_s(10, interval, 100)
