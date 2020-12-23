@@ -129,7 +129,7 @@ def make_stu(n, m, k, a, b):
 #student = make_stu(n, m)
 
 
-# 大学のデータの作成。
+# 大学のデータの作成。Hard用
 # ['第二段階指定1科類', '第二段階指定1枠数', '指定1残席', '指定1底点', '指定1点数', '指定1学籍番号']
 def univ_make(df, df_collist):
     for j in df_collist:
@@ -142,7 +142,7 @@ def univ_make(df, df_collist):
     return df
 
 
-#未完成
+# 大学のデータの作成。(Soft用)
 def univ_make_s(df, df_collist):
     univ_s = df.copy()
     for j in df_collist:

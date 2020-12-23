@@ -5,7 +5,7 @@ import random
 import csv
 import pprint
 import datamake
-import dafunc
+import dafunc_H
 import dafunc_S
 import simulation
 import simu_run

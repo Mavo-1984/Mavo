@@ -24,8 +24,8 @@ def univ_make_s(df, df_collist):
 
 
 
----dafunc---(H用)
-def da(student, univ, df_collist):
+---dafunc_H---(H用)
+def da_H(student, univ, df_collist):
 現行方式(Hard)のDAを実行する。
 一回の関数実行で1回のアプライのステップを行うため、未内定(student[i][3] == -1)がいなくなるまで実行する必要あり。
 
@@ -33,7 +33,7 @@ def da(student, univ, df_collist):
 
 
 ---dafunc_S---(S用)
-def da(student, univ, df_collist):
+def da_H(student, univ, df_collist):
 MInority Reserve方式(Soft)のDAを実行する。
 一回の関数実行で1回のアプライのステップを行うため、未内定(student[i][3] == -1)がいなくなるまで実行する必要あり。
 実装方針は、基本的には最初は指定科類枠科類分も全科類枠で持っておき、

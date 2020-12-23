@@ -7,7 +7,7 @@ import datamake
 
 
 #df_collist =[['第二段階指定1科類', '第二段階指定1枠数', '指定1残席', '指定1底点', '指定1点数', '指定1学籍番号'], ['第二段階指定2科類', '第二段階指定2枠数', '指定2残席', '指定2底点', '指定2点数', '指定2学籍番号'], ['第二段階指定3科類', '第二段階指定3枠数', '指定3残席', '指定3底点', '指定3点数', '指定3学籍番号'], ['第二段階指定4科類', '第二段階指定4科類.1', '指定4残席', '指定4底点', '指定4点数', '指定4学籍番号']]
-def da(student, univ, df_collist):
+def da_H(student, univ, df_collist):
     n, m, k = datamake.stu_num()
     #上から処理を実行
     for i in range(1, n + 1):
@@ -77,7 +77,7 @@ def simulation(cnt):
         univ = datamake.univ_make(df, df_collist)
 
         for i in range(150):
-            da(student, univ, df_collist)
+            da_H(student, univ, df_collist)
             result0.append(len(np.where(student[:, 3] == 0)[0]))
             result1.append(len(np.where(student[:, 3] == -1)[0]))
 
