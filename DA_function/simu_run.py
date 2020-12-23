@@ -8,8 +8,10 @@ import dafunc_H
 import dafunc_S
 import simulation
 import matplotlib
-% matplotlib inline
+#matplotlib inline
 import matplotlib.pyplot as plt
+
+
 #a =start ,b=finish ,c間隔
 def make_interval(a, b, c):
     d = int((b - a) / c)
