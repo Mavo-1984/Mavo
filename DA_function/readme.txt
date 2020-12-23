@@ -54,6 +54,16 @@ a,bの条件は 0< a < b <1
 def simulation_s(cnt, a, b, rand):
 
 ---simu_run---
+シュミレーション を実行する。
+返り値は学生のデータフレームのうち、
+0学生番号、
+1科類、
+2点数
+3内定場所、
+4内定先志望順位
+×シュミレーション 回数となっている。
+結果はurl = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' +  シュミレーション 回数 + "-" + 確率A + "-" + 確率B + 'DA実施方式.txt'の順で保存される。
+
 #a =start ,b=finish ,c間隔
 def make_interval(a, b, c):
 #Nシュミレーション 回数, interval_list = [[A,B]]の確率のリスト, rand:乱数のseed

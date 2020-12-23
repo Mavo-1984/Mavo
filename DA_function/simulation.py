@@ -33,7 +33,7 @@ def simulation(cnt, a, b, rand):
             df_stu = np.vstack((df_stu, df_stuadd))
 
     url = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + str(
-        cnt) + "-" + str(a) + "-" + str(b) + 'DA-Q.txt'
+        cnt) + "-" + str(a) + "-" + str(b) + 'DA-H.txt'
 
     np.savetxt(url, df_stu, delimiter=',', fmt='%d')
 

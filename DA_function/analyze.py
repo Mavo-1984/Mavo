@@ -32,7 +32,7 @@ def analyze(path, K):
 
 
 analyze(
-    "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/1-0.95-0.97DA-Q.txt",
+    "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/1-0.95-0.97DA-H.txt",
     1)
 
 print("Hallo")
