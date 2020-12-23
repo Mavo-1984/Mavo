@@ -44,7 +44,7 @@ MInority Reserve方式(Soft)のDAを実行する。
 
 
 
----simulation---
+---simulation---(H,S共通)
 #cnt:シュミレーション の実行回数 a :Aの確率b:Bの確率,rand = seedの決定
 a,bの条件は 0< a < b <1
 def simulation(cnt, a, b, rand):
@@ -53,9 +53,10 @@ a,bの条件は 0< a < b <1
 #cnt:シュミレーション の実行回数 a :Aの確率b:Bの確率,rand = seedの決定
 def simulation_s(cnt, a, b, rand):
 
----simu_run---
+---simu_run---(H,S共通)
 シュミレーション を実行する。
-返り値は学生のデータフレームのうち、
+返り値は
+学生
 0学生番号、
 1科類、
 2点数
@@ -63,6 +64,15 @@ def simulation_s(cnt, a, b, rand):
 4内定先志望順位
 ×シュミレーション 回数となっている。
 結果はurl = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' +  シュミレーション 回数 + "-" + 確率A + "-" + 確率B + 'DA実施方式.txt'の順で保存される。
+
+返り値は大学のデータフレームのうち、
+0指定科類枠第1内定者数、
+1指定科類枠第2内定者数、
+2指定科類枠第3内定者数、
+3指定科類枠第4内定者数、
+4合計内定者数
+×シュミレーション 回数となっている。
+結果はurl_univ = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + シュミレーション 回数 + "-" + 確率A + "-" + 確率B + 'DA実施方式_univ.txt'順で保存される。
 
 #a =start ,b=finish ,c間隔
 def make_interval(a, b, c):

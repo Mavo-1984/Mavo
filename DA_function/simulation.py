@@ -34,7 +34,7 @@ def simulation(cnt, a, b, rand):
             for p in univ[d_list]:
                 stu_num = 0
                 for h in p:
-                    if 10 < h < 999:
+                    if 10 < h < 9999:
                         stu_num += 1
                 naitei_num.append(stu_num)
 
@@ -84,7 +84,7 @@ def simulation_s(cnt, a, b, rand):
             for p in univ_s[d_list]:
                 stu_num = 0
                 for h in p:
-                    if 10 < h < 999:
+                    if 10 < h < 9999:
                         stu_num += 1
                 naitei_num.append(stu_num)
 
@@ -109,7 +109,7 @@ def simulation_s(cnt, a, b, rand):
 
 #def stu_summary(df_stu):
 
-res0 = simulation_s(10, 0.8, 0.9, 100)
+#res0 = simulation_s(10, 0.8, 0.9, 100)
 #res0 = simulation(1, 0.8, 0.9, 100)
 
 #def do_simulation():
