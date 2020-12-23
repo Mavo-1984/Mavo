@@ -43,25 +43,3 @@ def run_simulation_s(N, interval_list, rand):
 #print(interval)
 #run_simulation(10, interval, 100)
 #run_simulation_s(10, interval, 100)
-
-price = [100, 250, 380, 500, 700]
-number = [1, 2, 3, 4, 5]
-
-# グラフを書く
-plt.plot(price, number, marker="x")
-
-# グラフのタイトル
-plt.title("price / number")
-
-# x軸のラベル
-plt.xlabel("price")
-
-# y軸のラベル
-plt.ylabel("number")
-
-# グリッドを表示する
-plt.grid(True)
-
-# 表示する
-print(plt.show())
-print("Hi")
