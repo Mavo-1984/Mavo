@@ -110,7 +110,7 @@ def make_stu(n, m, k, a, b):
     for i in range(1, n + 1):
         #0には学生番号、2には点数、3には内定学科（最初は-1）を入れる
         student[i][0] = i
-        student[i][2] = random.randrange(35, 90, 1)
+        student[i][2] = random.randrange(11, 9998, 1)
         student[i][3] = -1
         # make_prefを使う
         student[i][1] = tmp_2[tmp]
@@ -129,7 +129,7 @@ def make_stu(n, m, k, a, b):
 #student = make_stu(n, m)
 
 
-# 大学のデータの作成。
+# 大学のデータの作成。Hard用
 # ['第二段階指定1科類', '第二段階指定1枠数', '指定1残席', '指定1底点', '指定1点数', '指定1学籍番号']
 def univ_make(df, df_collist):
     for j in df_collist:
@@ -142,7 +142,7 @@ def univ_make(df, df_collist):
     return df
 
 
-#未完成
+# 大学のデータの作成。(Soft用)
 def univ_make_s(df, df_collist):
     univ_s = df.copy()
     for j in df_collist:

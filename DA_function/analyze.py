@@ -5,7 +5,7 @@ import random
 import csv
 import pprint
 import datamake
-import dafunc
+import dafunc_H
 import dafunc_S
 import simulation
 import simu_run
@@ -32,7 +32,7 @@ def analyze(path, K):
 
 
 analyze(
-    "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/1-0.95-0.97DA-Q.txt",
+    "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/1-0.95-0.97DA-H.txt",
     1)
 
 print("Hallo")

@@ -4,7 +4,7 @@ import random
 import csv
 import pprint
 import datamake
-import dafunc
+import dafunc_H
 
 
 def simulation(cnt, a, b):
@@ -21,7 +21,7 @@ def simulation(cnt, a, b):
         univ = datamake.univ_make(df, df_collist)
 
         for i in range(200):
-            dafunc.da(student, univ, df_collist)
+            dafunc_H.da_H(student, univ, df_collist)
 
         if j == 0:
             df_stu = student[:, 0:5].T.copy()
