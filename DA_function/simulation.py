@@ -46,12 +46,12 @@ def simulation(cnt, a, b, rand):
     url = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + str(
         cnt) + "-" + str(a) + "-" + str(b) + 'DA-H.txt'
 
-    np.savetxt(url, df_stu, delimiter=',', fmt='%d')
+    np.savetxt(url, df_stu[1::,1::], delimiter=',', fmt='%d')
 
     url_univ = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + str(
         cnt) + "-" + str(a) + "-" + str(b) + 'DA-H_univ.txt'
 
-    np.savetxt(url_univ, df_univ, delimiter=',', fmt='%d')
+    np.savetxt(url_univ, df_univ[1::,:], delimiter=',', fmt='%d')
 
     return df_stu
 
@@ -97,12 +97,12 @@ def simulation_s(cnt, a, b, rand):
     url = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + str(
         cnt) + "-" + str(a) + "-" + str(b) + 'DA-S.txt'
 
-    np.savetxt(url, df_stu, delimiter=',', fmt='%d')
+    np.savetxt(url, df_stu[1::,1::], delimiter=',', fmt='%d')
 
     url_univ = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + str(
         cnt) + "-" + str(a) + "-" + str(b) + 'DA-S_univ.txt'
 
-    np.savetxt(url_univ, df_univ, delimiter=',', fmt='%d')
+    np.savetxt(url_univ, df_univ[1::,:], delimiter=',', fmt='%d')
 
     return df_stu
 
