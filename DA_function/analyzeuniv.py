@@ -13,10 +13,11 @@ mpl.font_manager._rebuild()
 
 
 
+df_univcap = np.loadtxt("/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/univcap.txt", delimiter=',', dtype='int64')
 
 
 def mean_unmatch(path, K,p,method):
-    plt.style.use('ggplot')
+    #plt.style.use('ggplot')
     #font = {'family': 'meiryo'}
     #mpl.rc('font', **font)
 
@@ -66,98 +67,103 @@ def makepath_S_univ(a,b):
   path = "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/10-" + str(a) +"-" + str(b) + "DA-S_univ.txt"
   return path
 
-unmatch_H = []
-unmatch_S  = []
-tmean_H= []
-tmean_S = []
-DF_list = [unmatch_H,unmatch_S,tmean_H,tmean_S]
+
+#Hard用の分析
+df_univcap = np.tile(df_univcap,(10,1))
 
 for i in range(11):
-  path = makepath_H(0.0 + i*0.1,0.5 + i*0.05)
-  a , b = mean_unmatch(
-     path,
-    10 , round(0.0 + i*0.1,2),"H")
-  unmatch_H.append(a)
-  tmean_H.append(b)
+    path = makepath_H_univ(0.0 + i*0.1,0.5 + i*0.05)
+    if i == 0:
+        df_H_tmp = np.loadtxt(path, delimiter=',', dtype='int64')
+        df_H = df_univcap - df_H_tmp
+    else:
+        df_H_tmp=  np.loadtxt(path, delimiter=',', dtype='int64')
+        df_Hadd = df_univcap - df_H_tmp
+        df_H = np.concatenate([df_H, df_Hadd], 0) 
 
-print(unmatch_H)
 
-
+df_H_sum = df_H[:,1::].sum(axis=1)
+df_rest_sitei = []
+df_rest_zenka = []
+df_rest_unmatch = []
 for i in range(11):
-  path = makepath_S(0.0 + i*0.1,0.5 + i*0.05)
-  a , b = mean_unmatch(
-     path,
-    10 , round(0.0 + i*0.1,2),"S")
-  unmatch_S.append(a)
-  tmean_S.append(b)
+    for j in range(10):
+        df_rest_sitei.append(["H",i*0.1,df_H_sum[i*50 +j*5]+ df_H_sum[i*50 +j*5+1] + df_H_sum[i*50 +j*5+2]])
+        df_rest_zenka.append(["H",i*0.1,df_H_sum[i*50 +j*5+3]])
+        df_rest_unmatch.append(["H",i*0.1,800 - df_H[i*50 +j*5,0]])
 
 
-unmatch_H= list(itertools.chain.from_iterable(unmatch_H))
-tmean_H= list(itertools.chain.from_iterable(tmean_H))
-unmatch_S = list(itertools.chain.from_iterable(unmatch_S))
-tmean_S = list(itertools.chain.from_iterable(tmean_S))
+#df_rest_sitei= list(itertools.chain.from_iterable(df_rest_sitei))
+df_rest_sitei= pd.DataFrame(df_rest_sitei,columns=['meathod', 'prob', 'num'])
+sns.regplot(x=df_rest_sitei['prob'], y=df_rest_sitei['num'],label="残指定科類枠")
+df_rest_zenka= pd.DataFrame(df_rest_zenka,columns=['meathod', 'prob', 'num'])
+sns.regplot(x=df_rest_zenka['prob'], y=df_rest_zenka['num'],label="残全科類枠")
+df_rest_unmatch= pd.DataFrame(df_rest_unmatch,columns=['meathod', 'prob', 'num'])
+sns.regplot(x=df_rest_unmatch['prob'], y=df_rest_unmatch['num'],label="留年者数")
 
-df_unmatch_H= pd.DataFrame(unmatch_H,columns=['meathod', 'prob', 'num'])
-df_tmean_H= pd.DataFrame(tmean_H,columns=['meathod', 'prob', 'num'])
-df_unmatch_S = pd.DataFrame(unmatch_S,columns=['meathod', 'prob', 'num'])
-df_tmean_S = pd.DataFrame(tmean_S,columns=['meathod', 'prob', 'num'])
-
-
-
-sns.regplot(x=df_tmean_H['prob'], y=df_tmean_H['num'])
-sns.regplot(x=df_unmatch_H['prob'], y=df_unmatch_H['num'])
+plt.legend(bbox_to_anchor=(1, 1), loc='upper right', prop={"family":"IPAexGothic"},borderaxespad=0, fontsize=18)
 
 plt.title("Hard方式", fontname="IPAexGothic")
 # x方向のラベル
 plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
 # y方向のラベル
-plt.ylabel("留年者数/内定志望順位平均", fontname="IPAexGothic")
+plt.ylabel("人数", fontname="IPAexGothic")
 # グラフの表示範囲(x方向)
 plt.xlim(-0.1, 1.1)
+plt.savefig('Hard_univ.pdf')
+plt.show()
+##終了
 
-plt.savefig('Hard_UT.pdf')
-plt.close()
 
-sns.regplot(x=df_tmean_S['prob'], y=df_tmean_S['num'])
-sns.regplot(x=df_unmatch_S['prob'], y=df_unmatch_S['num'])
+
+
+#Soft用の分析
+df_univcap = np.tile(df_univcap,(10,1))
+
+for i in range(11):
+    path = makepath_S_univ(0.0 + i*0.1,0.5 + i*0.05)
+    if i == 0:
+        df_S_tmp = np.loadtxt(path, delimiter=',', dtype='int64')
+        df_S = df_univcap - df_S_tmp
+    else:
+        df_S_tmp=  np.loadtxt(path, delimiter=',', dtype='int64')
+        df_Sadd = df_univcap - df_S_tmp
+        df_S = np.concatenate([df_S, df_Sadd], 0) 
+
+
+df_S_sum = df_S[:,1::].sum(axis=1)
+df_rest_sitei = []
+df_rest_zenka = []
+df_rest_unmatch = []
+for i in range(11):
+    for j in range(10):
+        df_rest_sitei.append(["H",i*0.1,df_S_sum[i*50 +j*5]+ df_S_sum[i*50 +j*5+1] + df_S_sum[i*50 +j*5+2]])
+        df_rest_zenka.append(["H",i*0.1,df_S_sum[i*50 +j*5+3]])
+        df_rest_unmatch.append(["H",i*0.1,800 - df_S[i*50 +j*5,0]])
+
+
+#df_rest_sitei= list(itertools.chain.from_iterable(df_rest_sitei))
+df_rest_sitei= pd.DataFrame(df_rest_sitei,columns=['meathod', 'prob', 'num'])
+sns.regplot(x=df_rest_sitei['prob'], y=df_rest_sitei['num'],label="残指定科類枠")
+df_rest_zenka= pd.DataFrame(df_rest_zenka,columns=['meathod', 'prob', 'num'])
+sns.regplot(x=df_rest_zenka['prob'], y=df_rest_zenka['num'],label="残全科類枠")
+df_rest_unmatch= pd.DataFrame(df_rest_unmatch,columns=['meathod', 'prob', 'num'])
+sns.regplot(x=df_rest_unmatch['prob'], y=df_rest_unmatch['num'],label="留年者数")
+
+plt.legend(bbox_to_anchor=(1, 1), loc='upper right', prop={"family":"IPAexGothic"},borderaxespad=0, fontsize=18)
+
 plt.title("Soft方式", fontname="IPAexGothic")
 # x方向のラベル
 plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
 # y方向のラベル
-plt.ylabel("留年者数/内定志望順位平均", fontname="IPAexGothic")
+plt.ylabel("人数", fontname="IPAexGothic")
 # グラフの表示範囲(x方向)
 plt.xlim(-0.1, 1.1)
+plt.savefig('Soft_univ.pdf')
+plt.show()
+##終了
 
 
-plt.savefig('Soft_UT.pdf')
-plt.close()
-
-sns.regplot(x=df_tmean_H['prob'], y=df_tmean_H['num'])
-sns.regplot(x=df_tmean_S['prob'], y=df_tmean_S['num'])
 
 
-plt.title("Hard-Soft内定志望順位平均", fontname="IPAexGothic")
-# x方向のラベル
-plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
-# y方向のラベル
-plt.ylabel("内定志望順位平均", fontname="IPAexGothic")
-# グラフの表示範囲(x方向)
-plt.xlim(-0.1, 1.1)
-
-plt.savefig('HS-mean.pdf')
-plt.close()
-
-sns.regplot(x=df_unmatch_H['prob'], y=df_unmatch_H['num'])
-sns.regplot(x=df_unmatch_S['prob'], y=df_unmatch_S['num'])
-
-plt.title("Hard-Soft留年者数", fontname="IPAexGothic")
-# x方向のラベル
-plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
-# y方向のラベル
-plt.ylabel("留年者数", fontname="IPAexGothic")
-# グラフの表示範囲(x方向)
-plt.xlim(-0.1, 1.1)
-plt.savefig('HS-unmatch.pdf')
-plt.close()
-
-
+  
