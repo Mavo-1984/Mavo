@@ -4,16 +4,21 @@ import datetime as dt
 import random
 import csv
 import pprint
-import matplotlib
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn as sns
 import itertools
-from google.colab import files
+mpl.font_manager._rebuild()
+#mpl.rcParameters['font.family'] = 'IPAexGothic'
 
-def analyze(path, K,p,method):
+
+
+
+
+def mean_unmatch(path, K,p,method):
     plt.style.use('ggplot')
-    font = {'family': 'meiryo'}
-    matplotlib.rc('font', **font)
+    #font = {'family': 'meiryo'}
+    #mpl.rc('font', **font)
 
     df = pd.read_csv(path, sep=",", header=None)
     df_boollist = []
@@ -23,80 +28,136 @@ def analyze(path, K,p,method):
     for i in range(K):
         mean = df.mean(axis='columns', skipna=True).copy()
         df_meanlist.append([method,p,mean[4]])
-        df_bool = (df.iloc[5 * i + 3, 1::] == 0)
+        df_bool = (df.iloc[5 * i + 3, :] == 0)
         df_boollist.append([method,p,df_bool.sum()])
-        #print(df_bool.sum())
-        #print((df.iloc[5 * K + 4, 1::] == 1).sum())
+
 
     return df_boollist,df_meanlist
 
-    #dftest.plot.bar(alpha=0.6, figsize=(12, 3), bins=2, kind='hist')
-    #plt.title(u'普通の棒グラフ', size=16)
 
-def makepath_Q(a,b):
+def makepath_H(a,b):
   a = round(a, 1)
   b = round(b, 2)
   
-  path = "/content/drive/MyDrive/便利用/colab/Mavo-master/Result/10-" + str(a) +"-" + str(b) + "DA-Q.txt"
+  path = "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/10-" + str(a) +"-" + str(b) + "DA-H.txt"
+  
+  return path
+
+def makepath_H_univ(a,b):
+  a = round(a, 1)
+  b = round(b, 2)
+  
+  path = "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/10-" + str(a) +"-" + str(b) + "DA-H_univ.txt"
+  
   return path
 
 def makepath_S(a,b):
   a = round(a, 1)
   b = round(b, 2)
   
-  path = "/content/drive/MyDrive/便利用/colab/Mavo-master/Result/10-" + str(a) +"-" + str(b) + "DA-S.txt"
+  path = "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/10-" + str(a) +"-" + str(b) + "DA-S.txt"
   return path
 
-unmatch_Q  = []
-unmatch_S  = []
-tmean_Q = []
-tmean_S = []
-DF_list = [unmatch_Q,unmatch_S,tmean_Q,tmean_S]
-for i in range(10):
-  path = makepath_Q(0.0 + i*0.1,0.5 + i*0.05)
-  a , b = analyze(
-     path,
-    10 , round(0.0 + i*0.1,2),"Q")
-  unmatch_Q.append(a)
-  tmean_Q.append(b)
+def makepath_S_univ(a,b):
 
-for i in range(10):
+  a = round(a, 1)
+  b = round(b, 2)
+  
+  path = "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/10-" + str(a) +"-" + str(b) + "DA-S_univ.txt"
+  return path
+
+unmatch_H = []
+unmatch_S  = []
+tmean_H= []
+tmean_S = []
+DF_list = [unmatch_H,unmatch_S,tmean_H,tmean_S]
+
+for i in range(11):
+  path = makepath_H(0.0 + i*0.1,0.5 + i*0.05)
+  a , b = mean_unmatch(
+     path,
+    10 , round(0.0 + i*0.1,2),"H")
+  unmatch_H.append(a)
+  tmean_H.append(b)
+
+print(unmatch_H)
+
+
+for i in range(11):
   path = makepath_S(0.0 + i*0.1,0.5 + i*0.05)
-  a , b = analyze(
+  a , b = mean_unmatch(
      path,
     10 , round(0.0 + i*0.1,2),"S")
   unmatch_S.append(a)
   tmean_S.append(b)
-  unmatch_Q = list(itertools.chain.from_iterable(unmatch_Q))
-tmean_Q = list(itertools.chain.from_iterable(tmean_Q))
+
+
+unmatch_H= list(itertools.chain.from_iterable(unmatch_H))
+tmean_H= list(itertools.chain.from_iterable(tmean_H))
 unmatch_S = list(itertools.chain.from_iterable(unmatch_S))
 tmean_S = list(itertools.chain.from_iterable(tmean_S))
 
-df_unmatch_Q = pd.DataFrame(unmatch_Q,columns=['meathod', 'prob', 'num'])
-df_tmean_Q = pd.DataFrame(tmean_Q,columns=['meathod', 'prob', 'num'])
+df_unmatch_H= pd.DataFrame(unmatch_H,columns=['meathod', 'prob', 'num'])
+df_tmean_H= pd.DataFrame(tmean_H,columns=['meathod', 'prob', 'num'])
 df_unmatch_S = pd.DataFrame(unmatch_S,columns=['meathod', 'prob', 'num'])
 df_tmean_S = pd.DataFrame(tmean_S,columns=['meathod', 'prob', 'num'])
 
-print(df_unmatch_S)
-print(df_unmatch_Q)
-"""
-sns.regplot(x=df_tmean_Q['prob'], y=df_tmean_Q['num'])
-sns.regplot(x=df_unmatch_Q['prob'], y=df_unmatch_Q['num'])
-plt.savefig('Hardut.pdf')
-files.download("Hardut.pdf")
-sns.regplot(x=df_tmean_S['prob'], y=df_tmean_S['num'])
-sns.regplot(x=df_unmatch_S['prob'], y=df_unmatch_S['num'])
-plt.savefig('Softut.pdf')
-files.download("Softut.pdf")
-sns.regplot(x=df_tmean_Q['prob'], y=df_tmean_Q['num'])
+
+
+sns.regplot(x=df_tmean_H['prob'], y=df_tmean_H['num'])
+sns.regplot(x=df_unmatch_H['prob'], y=df_unmatch_H['num'])
+
+plt.title("Hard方式", fontname="IPAexGothic")
+# x方向のラベル
+plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
+# y方向のラベル
+plt.ylabel("留年者数/内定志望順位平均", fontname="IPAexGothic")
+# グラフの表示範囲(x方向)
+plt.xlim(-0.1, 1.1)
+
+plt.savefig('Hard_UT.pdf')
+plt.close()
 
 sns.regplot(x=df_tmean_S['prob'], y=df_tmean_S['num'])
+sns.regplot(x=df_unmatch_S['prob'], y=df_unmatch_S['num'])
+plt.title("Soft方式", fontname="IPAexGothic")
+# x方向のラベル
+plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
+# y方向のラベル
+plt.ylabel("留年者数/内定志望順位平均", fontname="IPAexGothic")
+# グラフの表示範囲(x方向)
+plt.xlim(-0.1, 1.1)
+
+
+plt.savefig('Soft_UT.pdf')
+plt.close()
+
+sns.regplot(x=df_tmean_H['prob'], y=df_tmean_H['num'])
+sns.regplot(x=df_tmean_S['prob'], y=df_tmean_S['num'])
+
+
+plt.title("Hard-Soft内定志望順位平均", fontname="IPAexGothic")
+# x方向のラベル
+plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
+# y方向のラベル
+plt.ylabel("内定志望順位平均", fontname="IPAexGothic")
+# グラフの表示範囲(x方向)
+plt.xlim(-0.1, 1.1)
+
 plt.savefig('HS-mean.pdf')
-files.download("HS-mean.pdf")
-sns.regplot(x=df_unmatch_Q['prob'], y=df_unmatch_Q['num'])
+plt.close()
 
+sns.regplot(x=df_unmatch_H['prob'], y=df_unmatch_H['num'])
 sns.regplot(x=df_unmatch_S['prob'], y=df_unmatch_S['num'])
-plt.savefig('HS-unmatch.pdf')
-files.download("HS-unmatch.pdf")
 
-"""
+plt.title("Hard-Soft留年者数", fontname="IPAexGothic")
+# x方向のラベル
+plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
+# y方向のラベル
+plt.ylabel("留年者数", fontname="IPAexGothic")
+# グラフの表示範囲(x方向)
+plt.xlim(-0.1, 1.1)
+plt.savefig('HS-unmatch.pdf')
+plt.close()
+
+
