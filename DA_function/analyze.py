@@ -9,8 +9,10 @@ import dafunc_H
 import dafunc_S
 import simulation
 import simu_run
-#import matplotlib
-#import matplotlib.pyplot as plt
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import itertools
 
 
 def analyze(path, K):
@@ -31,8 +33,14 @@ def analyze(path, K):
     #plt.title(u'普通の棒グラフ', size=16)
 
 
-analyze(
-    "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/1-0.95-0.97DA-H.txt",
-    1)
+#analyze(
+#    "/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/1-0.95-0.97DA-H.txt",
+#    1)
 
-print("Hallo")
+#print("Hallo")
+x = np.array([1,2,3,4])
+y = np.array([2,3,4,5])
+
+# グラフを描画
+plt.plot(x, y)
+plt.show()

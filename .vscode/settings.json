@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/usr/local/opt/python@3.8/bin/python3.8",
+    "python.pythonPath": "/Users/masato/.pyenv/shims/python",
     "python.linting.flake8Enabled": false,
     "python.linting.mypyEnabled": false,
     "python.linting.pylintEnabled": true,

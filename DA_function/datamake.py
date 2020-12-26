@@ -169,3 +169,4 @@ def univ_make_s(df, df_collist):
 #print(df_r.iloc[2]['第二段階指定1科類'] in df_r.iloc[2]['第二段階指定4科類'])
 
 #print(univ_make_s(df, df_collist))
+
