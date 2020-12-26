@@ -114,4 +114,51 @@ def simulation_s(cnt, a, b, rand):
 
 #def do_simulation():
 
-print("HI")
+#print("HI")
+
+def simulation_c(cnt, a, b, rand):
+    df, df_collist = datamake.make_df(
+        '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/csvdata/sinhuri2018.csv'
+    )
+    n, m, k = datamake.stu_num()
+    df_stu = np.zeros((1, n + 1))
+    df_univ = np.zeros((1, k))
+
+    for j in range(cnt):
+        random.seed(rand + j)
+        student = datamake.make_stu(n, m, k, a, b)
+        #print(df_collist)
+        univ = datamake.univ_make(df, df_collist)
+
+        for i in range(300):
+            dafunc_H.da_H(student, univ, df_collist)
+
+        df_stuadd = student[:, 0:5].T.copy()
+        df_stu = np.vstack((df_stu, df_stuadd))
+        naitei_num = []
+        point_list = ["第二段階指定1枠数", "第二段階指定2枠数", "第二段階指定3枠数", "第二段階指定4枠数"]
+        for d_list in point_list:
+            for p in univ[d_list]:
+                naitei_num.append(p)
+
+        naitei = np.array(naitei_num).reshape((4, k))
+        df_univ = np.vstack((df_univ, naitei))
+        naitei_sum = np.sum(naitei, axis=0)
+        df_univ = np.vstack((df_univ, naitei_sum))
+
+    url = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + str(
+        cnt) + "-" + str(a) + "-" + str(b) + 'DA-H.txt'
+
+    np.savetxt(url, df_stu[1::,1::], delimiter=',', fmt='%d')
+
+    url_univ = '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/Result/' + str(
+        cnt) + "-" + str(a) + "-" + str(b) + 'DA-H_univ.txt'
+
+    np.savetxt(url_univ, df_univ[1::,:], delimiter=',', fmt='%d')
+
+    return df_stu
+
+
+
+test = simulation_c(1, 0.8, 0.9, 100)
+print("Hi")
