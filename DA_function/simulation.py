@@ -8,7 +8,7 @@ import dafunc_H
 import dafunc_S
 
 
-#cnt:シュミレーション の実行回数 a :Aの確率b:Bの確率,rand = seedの決定
+#cnt:シミュレーション の実行回数 a :Aの確率b:Bの確率,rand = seedの決定
 def simulation(cnt, a, b, rand):
     df, df_collist = datamake.make_df(
         '/Users/masato/Desktop/UTTdata/prog/PyProgramming/DA_algorithm/Mavo/csvdata/sinhuri2018.csv'
@@ -56,7 +56,7 @@ def simulation(cnt, a, b, rand):
     return df_stu
 
 
-#cnt:シュミレーション の実行回数 a :Aの確率b:Bの確率,rand = seedの決定
+#cnt:シミュレーション の実行回数 a :Aの確率b:Bの確率,rand = seedの決定
 def simulation_s(cnt, a, b, rand):
 
     n, m, k = datamake.stu_num()

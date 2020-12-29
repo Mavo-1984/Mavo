@@ -22,7 +22,7 @@ def make_interval(a, b, c):
     return inter
 
 
-#Nシュミレーション 回数, interval_list = [[A,B]]の確率のリスト, rand:乱数のseed
+#Nシミュレーション 回数, interval_list = [[A,B]]の確率のリスト, rand:乱数のseed
 def run_simulation(N, interval_list, rand):
     K = len(interval_list)
     for i in range(K):
@@ -30,7 +30,7 @@ def run_simulation(N, interval_list, rand):
                               rand)
 
 
-#Nシュミレーション 回数, interval_list = [[A,B]]の確率のリスト, rand:乱数のseed
+#Nシミュレーション 回数, interval_list = [[A,B]]の確率のリスト, rand:乱数のseed
 def run_simulation_s(N, interval_list, rand):
     K = len(interval_list)
     for i in range(K):
