@@ -103,13 +103,15 @@ sns.regplot(x=df_rest_unmatch['prob'], y=df_rest_unmatch['num'],label="留年者
 
 plt.legend(bbox_to_anchor=(1, 1), loc='upper right', prop={"family":"IPAexGothic"},borderaxespad=0, fontsize=18)
 
-plt.title("Hard方式", fontname="IPAexGothic")
+
 # x方向のラベル
 plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
 # y方向のラベル
 plt.ylabel("人数", fontname="IPAexGothic")
 # グラフの表示範囲(x方向)
 plt.xlim(-0.1, 1.1)
+plt.savefig('Hard_univ_notitle.pdf')
+plt.title("Hard方式 進学枠利用状況", fontname="IPAexGothic", fontsize=22)
 plt.savefig('Hard_univ.pdf')
 plt.show()
 ##終了
@@ -118,7 +120,7 @@ plt.show()
 
 
 #Soft用の分析
-df_univcap = np.tile(df_univcap,(10,1))
+
 
 for i in range(11):
     path = makepath_S_univ(0.0 + i*0.1,0.5 + i*0.05)
@@ -152,14 +154,17 @@ sns.regplot(x=df_rest_unmatch['prob'], y=df_rest_unmatch['num'],label="留年者
 
 plt.legend(bbox_to_anchor=(1, 1), loc='upper right', prop={"family":"IPAexGothic"},borderaxespad=0, fontsize=18)
 
-plt.title("Soft方式", fontname="IPAexGothic")
+
 # x方向のラベル
 plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
 # y方向のラベル
 plt.ylabel("人数", fontname="IPAexGothic")
 # グラフの表示範囲(x方向)
 plt.xlim(-0.1, 1.1)
+plt.savefig('Soft_univ_notitle.pdf')
+plt.title("Soft方式 進学枠利用状況", fontname="IPAexGothic", fontsize=22)
 plt.savefig('Soft_univ.pdf')
+
 plt.show()
 ##終了
 

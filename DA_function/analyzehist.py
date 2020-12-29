@@ -85,6 +85,7 @@ for i in range(11):
 
 
 
+
 for i in range(11):
   path = makepath_S(0.0 + i*0.1,0.5 + i*0.05)
   a = mean_unmatch(
@@ -93,11 +94,12 @@ for i in range(11):
   hist_S.append(a)
 
 """
+##各方式ごとの指定科類枠志望率別ヒストグラムを作成する
+##Soft方式の指定科類枠志望率別ヒストグラム
 bins = np.linspace(-1, 90, 50)
-
 for i in range(0,11):
     plt.hist( hist_S[i][0][2::], bins, alpha = 0.5, label='S0'+str(i))
-    plt.title("Soft内定志望順位", fontname="IPAexGothic")
+    
 
     plt.xlabel("内定志望順位", fontname="IPAexGothic")
     # y方向のラベル
@@ -106,14 +108,17 @@ for i in range(0,11):
     plt.ylim(0,900)
 
     plt.legend(loc='upper right')
+    plt.savefig("S-0" +str(i) + "hist_notitle.pdf")
+    plt.title("Soft方式 内定志望順位", fontname="IPAexGothic",fontsize=22)
     plt.savefig("S-0" +str(i) + "hist.pdf")
 
-    plt.close()
 
+    plt.close()
+##Hard方式の指定科類枠志望率別ヒストグラム
 bins = np.linspace(-1, 90, 50)
 for i in range(0,11):
-    plt.hist( hist_H[i][0][2::], bins, alpha = 0.5, label='S0'+str(i))
-    plt.title("Hard内定志望順位", fontname="IPAexGothic")
+    plt.hist( hist_H[i][0][2::], bins, alpha = 0.5, label='H0'+str(i))
+    
 
     plt.xlabel("内定志望順位", fontname="IPAexGothic")
     # y方向のラベル
@@ -122,21 +127,25 @@ for i in range(0,11):
     plt.ylim(0,900)
 
     plt.legend(loc='upper right')
+    plt.savefig("H-0" +str(i) + "hist_notitle.pdf")
+    plt.title("Hard方式 内定志望順位", fontname="IPAexGothic",fontsize=22)
     plt.savefig("H-0" +str(i) + "hist.pdf")
 
     plt.close()
-
+"""
+##各方式ごとの指定科類枠志望率別ヒストグラムを一枚に乗っけたものを作成する
+##Soft方式の指定科類枠志望率別ヒストグラム
 fig, axes = plt.subplots(2, 5, figsize=(20, 8))
-bins = np.linspace(-1, 90, 50)
+bins = np.linspace(-1, 80, 50)
 
 for i in range(0,10):
     #ab = plt.hist( hist_S[i][0][2::], bins, alpha = 0.5, label='S0'+str(i))
-    #axes[i//5, i%5].xlim(-1, 85)
-    #axes[i//5, i%5].ylim(0,900)
+    axes[i//5, i%5].set_xlim(-1, 85)
+    axes[i//5, i%5].set_ylim(0,900)
+    axes[i//5, i%5].set(title= str(i))
     
     
-
-    axes[i//5, i%5].hist( hist_S[i][0][2::], bins, alpha = 0.5, label='S0'+str(i))
+    axes[i//5, i%5].hist( hist_S[i][0][2::], bins,color = "b" ,alpha = 0.5, label='S0'+str(i))
     axes[i//5, i%5].legend(loc='upper right')
     
     #plt.title("Soft内定志望順位", fontname="IPAexGothic")
@@ -148,29 +157,26 @@ for i in range(0,10):
 
     
 
+plt.savefig("Shist_notitle.pdf")
+fig.suptitle("Soft内定志望順位", fontname="IPAexGothic",fontsize = 22)
 plt.savefig("Shist.pdf")
-
 plt.close()
 
-
-
-"""
-
-
+##Hard方式の指定科類枠志望率別ヒストグラム
 fig, axes = plt.subplots(2, 5, figsize=(20, 8))
-bins = np.linspace(-1, 90, 50)
+bins = np.linspace(-1, 80, 50)
 
 for i in range(0,10):
     #ab = plt.hist( hist_S[i][0][2::], bins, alpha = 0.5, label='S0'+str(i))
-    #axes[i//5, i%5].xlim(-1, 85)
-    #axes[i//5, i%5].ylim(0,900)
+    axes[i//5, i%5].set_xlim(-1, 85)
+    axes[i//5, i%5].set_ylim(0,900)
+    axes[i//5, i%5].set(title= str(i))
     
     
-
-    axes[i//5, i%5].hist( hist_H[i][0][2::], bins, alpha = 0.5, label='H0'+str(i))
+    axes[i//5, i%5].hist( hist_H[i][0][2::], bins,color = "r" ,alpha = 0.5, label='H0'+str(i))
     axes[i//5, i%5].legend(loc='upper right')
     
-    #plt.title("Soft内定志望順位", fontname="IPAexGothic")
+    #plt.title("Hard内定志望順位", fontname="IPAexGothic")
 
     #plt.xlabel("内定志望順位", fontname="IPAexGothic")
     # y方向のラベル
@@ -178,118 +184,9 @@ for i in range(0,10):
     
 
     
-plt.title("Hard内定志望順位", fontname="IPAexGothic")
+
+plt.savefig("Hhist_notitle.pdf")
+fig.suptitle("Hard内定志望順位", fontname="IPAexGothic",fontsize = 22)
 plt.savefig("Hhist.pdf")
-
-plt.close()
-"""
-bins = np.linspace(-1, 90, 50)
-for i in range(0,10,3):
-    plt.hist( hist_S[i][0][2::], bins, alpha = 0.5, label='S0'+str(i))
-
-plt.title("Soft内定志望順位", fontname="IPAexGothic")
-
-plt.xlabel("内定志望順位", fontname="IPAexGothic")
-# y方向のラベル
-plt.ylabel("度数", fontname="IPAexGothic")
-
-plt.legend(loc='upper right')
-plt.savefig('S-hist.pdf')
-
-plt.show()
 plt.close()
 
-
-
-
-b = np.random.normal(2, 4, 900)
-
-bins = np.linspace(-10, 10, 50)
-
-plt.hist(a, bins, alpha = 0.5, label='a')
-plt.hist(b, bins, alpha = 0.5, label='b')
-plt.legend(loc='upper left')
-
-plt.show()
-
-
-
-
-bins = np.linspace(-10, 10, 50)
-
-plt.hist(a, bins, alpha = 0.5, label='a')
-plt.hist(b, bins, alpha = 0.5, label='b')
-plt.legend(loc='upper left')
-
-plt.show()
-
-
-unmatch_H= list(itertools.chain.from_iterable(unmatch_H))
-
-unmatch_S = list(itertools.chain.from_iterable(unmatch_S))
-
-
-df_unmatch_H= pd.DataFrame(unmatch_H,columns=['meathod', 'prob', 'num'])
-
-df_unmatch_S = pd.DataFrame(unmatch_S,columns=['meathod', 'prob', 'num'])
-
-
-
-sns.regplot(x=df_tmean_H['prob'], y=df_tmean_H['num'])
-sns.regplot(x=df_unmatch_H['prob'], y=df_unmatch_H['num'])
-
-plt.title("Hard方式", fontname="IPAexGothic")
-# x方向のラベル
-plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
-# y方向のラベル
-plt.ylabel("留年者数/内定志望順位平均", fontname="IPAexGothic")
-# グラフの表示範囲(x方向)
-plt.xlim(-0.1, 1.1)
-
-plt.savefig('Hard_UT.pdf')
-plt.close()
-
-sns.regplot(x=df_tmean_S['prob'], y=df_tmean_S['num'])
-sns.regplot(x=df_unmatch_S['prob'], y=df_unmatch_S['num'])
-plt.title("Soft方式", fontname="IPAexGothic")
-# x方向のラベル
-plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
-# y方向のラベル
-plt.ylabel("留年者数/内定志望順位平均", fontname="IPAexGothic")
-# グラフの表示範囲(x方向)
-plt.xlim(-0.1, 1.1)
-
-
-plt.savefig('Soft_UT.pdf')
-plt.close()
-
-sns.regplot(x=df_tmean_H['prob'], y=df_tmean_H['num'])
-sns.regplot(x=df_tmean_S['prob'], y=df_tmean_S['num'])
-
-
-plt.title("Hard-Soft内定志望順位平均", fontname="IPAexGothic")
-# x方向のラベル
-plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
-# y方向のラベル
-plt.ylabel("内定志望順位平均", fontname="IPAexGothic")
-# グラフの表示範囲(x方向)
-plt.xlim(-0.1, 1.1)
-
-plt.savefig('HS-mean.pdf')
-plt.close()
-
-sns.regplot(x=df_unmatch_H['prob'], y=df_unmatch_H['num'])
-sns.regplot(x=df_unmatch_S['prob'], y=df_unmatch_S['num'])
-
-plt.title("Hard-Soft留年者数", fontname="IPAexGothic")
-# x方向のラベル
-plt.xlabel("指定科類枠志望率", fontname="IPAexGothic")
-# y方向のラベル
-plt.ylabel("留年者数", fontname="IPAexGothic")
-# グラフの表示範囲(x方向)
-plt.xlim(-0.1, 1.1)
-plt.savefig('HS-unmatch.pdf')
-plt.close()
-
-
-"""
